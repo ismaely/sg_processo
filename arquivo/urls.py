@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+
+app_name = 'arquivo'
+urlpatterns = [
+    path('registarEntradaProcesso', views.registarEntradaProcesso, name='registar-entrada-processo'),
+    path('listar_arquivos', views.listar_arquivos, name='listar-arquivos'),
+]

@@ -1,0 +1,56 @@
+<!--
+@author [Gunza Ismael]
+@email [7ilip@gmail.com]
+@create date 2022-03-26 20:36:36
+@modify date 2022-05-12 10:45:07
+@desc [description]
+-->
+
+{% extends 'base.html' %}{% block corpo %}{% load static %}
+<div class="card">
+  <div class="card-header row"><h3>Listagem de Processos</h3></div>
+  <div class="card-body">
+    <table id="advanced_table" class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Assunto</th>
+          <th>Destinatario</th>
+          <th>Departamento</th>
+          <th>Estado</th>
+          <th>Data de Entrada</th>
+          <th class="no-link last"><span class="nobr">Opções</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dados in lista %}
+        <tr>
+          <td class="">{{ dados.autor|upper }}</td>
+          <td class="">{{ dados.assunto|upper|truncatechars:40 }}</td>
+          <td class="">{{ dados.destinatario|upper }}</td>
+          <td class="">{{ dados.departamentoDestino|upper }}</td>
+          <td class="">{{ dados.estado|upper }}</td>
+          <td class="">{{ dados.dataEntrada }}</td>
+          <td>
+            <ul class="nav nav-pills">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                  >Acção <i class="ik ik-chevron-down"></i
+                ></a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="">Atualizar</a>
+                  <a class="dropdown-item" href="">Encaminhar</a>
+                  <a class="dropdown-item" href="">Solicitar Resposta</a>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </li>
+            </ul>
+          </td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+<!--
+@author [Gunza Ismael]
+@email [7ilip@gmail.com]
+@create date 2021-10-12 10:24:31
+@modify date 2022-05-11 15:53:45
+@desc [description]
+-->
+
+{% extends 'base.html' %}{% block corpo %}{% load static %}
+<div class="row no-print">
+  <div class="col-12">
+    <button type="button" onclick="convertHtmlPdf()" class="btn btn-primary pull-right" style="margin-right: 5px"><i class="fa fa-download"></i> Imprimir - PDF</button>
+  </div>
+</div>
+{% if sucesso %}
+<script language="JavaScript">
+  $(function () {
+    showSuccessToast();
+  });
+</script>
+
+{% endif %}
+<p></p>
+<div class="card" id="reciboInscricao">
+  <div class="card-header">
+    <h3 class="d-block w-100"><small class="float-right"></small></h3>
+  </div>
+  <div class="card-body">
+    <div class="row invoice-info">
+      <div class="col-sm-4 invoice-col">
+        <div class="card-body">
+          <div class="text-center">
+            <h4 class="card-title mt-1"></h4>
+            <p class="card-subtitle"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8 invoice-col">
+        <address>
+          <p><img src="{% static 'img/mai.png' %}" alt="" style="height: 208px; margin-top: -30px" /></p>
+          <strong> </strong>
+        </address>
+      </div>
+      <!--
+      <div class="col-sm-4 invoice-col">
+        <b></b><br />
+        <br />
+        <b>Numero de Inscrição:</b> 4F3S8J<br />
+        <b>Estado:</b> <br />
+        <b></b>
+      </div>
+      -->
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-sm-4 invoice-col">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center">
+              <img src="{% static 'img/p2.png' %}" class="rounded-circle" width="200" />
+              <h4 class="card-title mt-1"></h4>
+              <p class="card-subtitle"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td><b>Remetente:</b> {{ dados.autor|safe|upper }}</td>
+              <td><b>Nª Processo:</b> {{ dados.numeroProcesso|safe|upper }}</td>
+            </tr>
+            <tr>
+              <td><b>Assunto:</b> {{ dados.assunto }}</td>
+              <td><b>Categoria:</b> {{ dados.tipologia }}</td>
+            </tr>
+            <tr>
+              <td><b>Destinatario:</b> {{ dados.destinatario }}</td>
+
+              <td><b>Departamento:</b>{{ dados.departamentoDestino }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <p class="lead">-----------------------------------------</p>
+
+        <div class="alert alert-secondary mt-20">
+          -- SECRETARIA GERAL DA MARINHA DE GUERRA ANGOLANA --
+          <br />
+          <b>E-mail:</b> {{ dados.email|safe }}<br />
+          <b>Telefone:</b> <br />
+        </div>
+      </div>
+      <div class="col-6">
+        <p class="lead">-----------------------------------------</p>
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th style="width: 50%">Telefone:</th>
+              <td>{{ dados.telefone|safe|upper }}</td>
+            </tr>
+            <tr>
+              <th>Data de Entrada:</th>
+              <td>{{ dados.dataEntrada|upper }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div id="visitfromworld" style="width: 100%; height: 300px"></div>
+        <div class="w-100 clearfix">
+          <span class="text-center text-sm-left d-md-inline-block">XSOF V1.0</span>
+          <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">COMANDO DA MARINHA DE GUERRA ANGOLANA<a href="#" class="text-dark" target="_blank"></a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row no-print">
+      <div class="col-12">
+        <hr />
+        <p></p>
+        <!--
+        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px"><i class="fa fa-download"></i> Imprimir - PDF</button>
+      --></div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

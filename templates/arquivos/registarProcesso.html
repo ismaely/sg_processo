@@ -1,0 +1,194 @@
+<!--
+@author [Gunza Ismael]
+@email [7ilip@gmail.com]
+@create date 2022-03-27 15:12:32
+@modify date 2022-05-11 16:23:48
+@desc [description]
+-->
+
+{% extends 'base.html' %}{% block corpo %}{% load static %}
+<div class="row">
+  <div class="col-md-12">
+    {% if sucesso %}
+    <script language="JavaScript">
+      $(function () {
+        showSuccessToast();
+      });
+    </script>
+
+    {% endif %}
+    <div class="card">
+      {% if sucesso %}
+      <span class=""> </span>
+      {% endif %}
+      <div class="card-header"><h3>Entrada do Processo</h3></div>
+      <div class="card-body">
+        <form id="regForm" class="forms-sample" action="{% url 'arquivo:registar-entrada-processo' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {% autoescape on %}
+          <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Nome do Rementente<span class="text-danger">*</span></label>
+                  {{ form.autor }} <span class="text-danger">{{ form.autor.errors }}</span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">BI Nº<span class="text-danger">*</span></label>
+                  {{ form.numeroIdentificacao }} {{ form.numeroIdentificacao.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Nome do Destinatário<span class="text-danger">*</span></label>
+                  {{ form.destinatario }} {{ form.destinatario.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Departamento</label>
+                  {{ form.departamentoDestino }} {{ form.departamentoDestino.errors }}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Assunto</label>
+                  {{ form.assunto }} {{ form.assunto.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Categoria Documental<span class="text-danger">*</span></label>
+                  {{ form.tipologia }} {{ form.tipologia.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Estado do Processo<span class="text-danger">*</span></label>
+                  {{ form.estado }} {{ form.estado.errors }}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Número do Processo</label>
+                  {{ form.numeroProcesso }} {{ form.numeroProcesso.errors }}
+                </div>
+              </div>
+              <!-- <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Número de Paginas <span class="text-danger">*</span></label>
+                  {{ form.numero_pagina }} {{ form.numero_pagina.errors }}
+                </div>
+              </div>-->
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Telefone</label>
+                  {{ form.telefone }} {{ form.telefone.errors }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Segundo fase-->
+
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">Data de Entrada<span class="text-danger">*</span></label>
+                  {{ form.dataEntrada }} {{ form.dataEntrada.errors }}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Descrição do Assunto</label>
+                  {{ form.descricao }} {{ form.descricao.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Arquivo</label>
+                  {{ form.arquivo }} {{ form.arquivo.errors }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terceiro fase-->
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Tira Fotografia</h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-5">
+                      <!--<img src="../img/user.jpg" width="150" class="rounded-circle" alt="user" />-->
+                      <div id="my_camera"></div>
+                    </div>
+                  </div>
+                  <div class="p-4 border-top mt-4">
+                    <div class="row text-center">
+                      <div class="col-6 border-right">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="configure()">
+                          <i class="ik ik-message-square f-20 mr-5"></i>Ligar Camera
+                        </a>
+                      </div>
+                      <div class="col-6">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="take_snapshot()"><i class="ik ik-box f-20 mr-5"></i>Foto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                {{ form.foto }}
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="results"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="result"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="overflow: auto" id="nextprevious">
+            <div style="float: right">
+              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button> <button type="button" id="nextBtn" onclick="nextPrev(1)">Proximo</button>
+            </div>
+          </div>
+          {% endautoescape %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
