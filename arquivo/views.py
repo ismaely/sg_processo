@@ -49,9 +49,7 @@ def listar_arquivos(request):
 
 
 
-
-# Create your views here.
-def procura_arquivos(request):
+def atribuirNumeroProcesso(request):
     form = Consultar_form(request.POST or None)
     if request.method == "POST":
         nome = request.POST['nome'].upper()
@@ -63,13 +61,16 @@ def procura_arquivos(request):
     return render (request, 'arquivos/procura_arquivos.html', context)
 
 
+
+
+
 #@login_required -> True if you want to love..
 def registarEntradaProcesso(request):
     form = Arquivo_Form(request.POST or None)
     if request.method == "POST":
         form = Arquivo_Form(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            bi = request.POST['numeroIdentificacao']
             sucesso = True
             context = {'dados':form.cleaned_data, 'sucesso': sucesso}
             return render (request, 'arquivos/reciboEntrada.html', context)
