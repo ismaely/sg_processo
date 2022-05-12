@@ -58,7 +58,7 @@ def atribuirNumeroProcesso(request):
         return render (request, 'arquivos/listar_arquivos.html', context)
 
     context = {'form': form}
-    return render (request, 'arquivos/procura_arquivos.html', context)
+    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
 
 
