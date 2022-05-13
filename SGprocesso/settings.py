@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'secretaria',
     'home',
     'arquivo',
+    'utilizador',
 ]
 
 MIDDLEWARE = [
