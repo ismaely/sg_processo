@@ -1,8 +1,51 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import check_password
+from django.contrib import messages
+from django.urls import reverse, path
 from environment.env import SENHA_PADRAO
 from utilizador.forms import Utilizador_Form, User_Form, LoginForm
 from config.views import prepara_foto
+from utilizador.models import Utilizador
+
+
+def index(request):
+    form = LoginForm(request.POST or None)
+    if request.method == 'POST':
+        try:
+            if form.is_valid():
+                senha = form.cleaned_data.get('senha')
+                nome = form.cleaned_data.get('username')
+                resp = User.objects.get(username=nome)
+                password = check_password(senha, resp.password)
+                if resp.username == nome and password:
+                    conta = Utilizador.objects.get(user_id=resp.id)
+                    if resp.is_active:
+                        if int(conta.estado) == 1:
+                            user = authenticate(username=nome, password=senha)
+                            login(request, user)
+                            request.session.set_expiry(31000) # a session vai terminar em 24 horas
+                            return HttpResponseRedirect(reverse('home:dashboard'))
+                        else:
+                            return HttpResponseRedirect(reverse('utilizador:troca-senha-padrao'))
+                    else:
+                        #sweetify.info(
+                        #request, 'A Conta esta desativada <br> Diriga-se ao Administrador!.', persistent='OK')
+                        return HttpResponseRedirect(reverse('utilizador:sair'))
+               
+        except User.DoesNotExist:
+            messages.warning(request, 'A conta não existe...')
+
+    context = {'form':form}
+    return render (request, 'utilizador/index.html', context)
+
+
+def loginUser(request):
+    context = {}
+    return render (request, 'utilizador/login.html', context)
 
 
 #@login_required
