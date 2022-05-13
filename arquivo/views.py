@@ -2,7 +2,7 @@ from multiprocessing import context
 from django.db.models import Q
 from django.shortcuts import render
 from arquivo.models import Arquivo
-from arquivo.forms import  Arquivo_Form, Consultar_form
+from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form
 
 
 
@@ -40,7 +40,6 @@ def listar_arquivos(request):
                 return render (request, 'arquivos/listarArquivo.html', context)
             elif bi:
                 lista = Arquivo.objects.select_related('estado').filter(QnumeroIdentificacao=bi)
-                
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
     
@@ -49,17 +48,29 @@ def listar_arquivos(request):
 
 
 
+
 def atribuirNumeroProcesso(request):
-    form = Consultar_form(request.POST or None)
+    form = NumeroProcesso_form(request.POST or None)
     if request.method == "POST":
-        nome = request.POST['nome'].upper()
-        lista = Arquivo.objects.filter(Q(titulo__contains=nome) | Q(autor__contains=nome))
+        bi = request.POST['numeroIdentificacao']
+        lista = Arquivo.objects.filter(numeroIdentificacao=bi)
         context = {'lista': lista}
-        return render (request, 'arquivos/listar_arquivos.html', context)
+        return render (request, 'arquivos/listarNumeroProcesso.html', context)
 
     context = {'form': form}
     return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
+
+def numeroProcesso(request, pk):
+    form = NumeroProcesso_form(request.POST or None)
+    if request.method == "POST":
+        lista = Arquivo.objects.get(id=pk)
+        # lista.numeroProcesso=
+        context = {}
+        return render (request, 'arquivos/listarNumeroProcesso.html', context)
+
+    context = {'form': form}
+    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
 
 
