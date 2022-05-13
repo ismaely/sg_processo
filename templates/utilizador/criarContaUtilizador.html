@@ -1,0 +1,149 @@
+<!--
+@author [Gunza Ismael]
+@email [7ilip@gmail.com]
+@create date 2022-03-29 02:40:20
+@modify date 2022-05-13 10:38:20
+@desc [description]
+-->
+
+{% extends 'base.html' %}{% block corpo %}{% load static %}
+<div class="row">
+  <div class="col-md-12">
+    {% if sucesso %}
+    <script language="JavaScript">
+      $(function () {
+        $("#exampleModalCenter").modal("show");
+      });
+    </script>
+
+    {% endif %}
+    <div class="card">
+      {% if sucesso %}
+      <span class=""> </span>
+      {% endif %}
+      <div class="card-header"><h3>Criar Conta do Utilizador</h3></div>
+      <div class="card-body">
+        <form id="regForm" class="forms-sample" action="{% url 'utilizador:criar-conta-utilizador' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {% autoescape on %}
+          <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Username: <span class="text-danger">*</span></label>
+                  {{ form.nome }} <span class="text-danger">{{ form.nome.errors }}</span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Nº Identificação: <span class="text-danger">*</span></label>
+                  {{ form2.ndi }} {{ form2.ndi.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Categoria do utilizador: <span class="text-danger">*</span></label>
+                  {{ form.categoria }} {{ form.categoria.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Telefone: <span class="text-danger">*</span></label>
+                  {{ form2.telefone }} {{ form2.telefone.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">E-mail: <span class="text-danger">*</span></label>
+                  {{ form.email }} {{ form.email.errors }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Tira Fotografia</h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-5">
+                      <!--<img src="../img/user.jpg" width="150" class="rounded-circle" alt="user" />-->
+                      <div id="my_camera"></div>
+                    </div>
+                  </div>
+                  <div class="p-4 border-top mt-4">
+                    <div class="row text-center">
+                      <div class="col-6 border-right">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="configure()">
+                          <i class="ik ik-message-square f-20 mr-5"></i>Ligar Camera
+                        </a>
+                      </div>
+                      <div class="col-6">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="take_snapshot()"><i class="ik ik-box f-20 mr-5"></i>Foto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                {{ form2.foto }}
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="results"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="result"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="overflow: auto" id="nextprevious">
+            <div style="float: right">
+              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button> <button type="button" id="nextBtn" onclick="nextPrev(1)">Proximo</button>
+            </div>
+          </div>
+          {% endautoescape %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header widget bg-success">
+        <h5 class="modal-title" id="exampleModalCenterLabel">Mensagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <strong>Conta Criada com sucesso</strong> <br />
+        Consulta o seu Email para saber da password
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
