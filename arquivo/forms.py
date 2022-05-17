@@ -48,6 +48,7 @@ class Consultar_form(forms.Form):
     numeroIdentificacao = forms.CharField(max_length=10,required=False, widget=forms.TextInput(attrs={'class': 'form-control '}))
     categoria = forms.CharField(max_length=160,required=False, widget=forms.Select(choices=CATEGORIA, attrs={'class': 'form-control'}))
     estado = forms.CharField(max_length=160,required=False, widget=forms.Select(choices=ESTADO, attrs={'class': 'form-control'}))
+    dataEntrada = forms.CharField(max_length=20,required=False, widget=forms.TextInput(attrs={'type': 'date','class': 'form-control'}))
     
   
 class NumeroProcesso_form(forms.Form):
