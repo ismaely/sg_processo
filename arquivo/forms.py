@@ -26,7 +26,7 @@ class Arquivo_Form(ModelForm):
     telefone = forms.CharField(max_length=30,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     numeroProcesso = forms.CharField(max_length=180, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     destinatario = forms.CharField(max_length=60,required=False,  widget=forms.TextInput( attrs={'class': 'form-control'}))
-    arquivo = forms.FileField(required=False, widget=forms.TextInput(attrs={'type': 'file', 'class': 'form-control'}))
+    arquivo = forms.FileField(required=False, widget=forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}))
     descricao = forms.CharField(max_length=510,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control '}))
     class Meta:
         model = Arquivo

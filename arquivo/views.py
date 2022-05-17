@@ -81,7 +81,8 @@ def registarEntradaProcesso(request):
     if request.method == "POST":
         form = Arquivo_Form(request.POST, request.FILES)
         if form.is_valid():
-            bi = request.POST['numeroIdentificacao']
+            form.save()
+            #bi = request.POST['numeroIdentificacao']
             sucesso = True
             context = {'dados':form.cleaned_data, 'sucesso': sucesso}
             return render (request, 'arquivos/reciboEntrada.html', context)
