@@ -21,13 +21,13 @@ for x in Estado.objects.all():
 class Arquivo_Form(ModelForm):
     assunto = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control '}))
     numero_pagina = forms.CharField(max_length=40,required=False, widget=forms.TextInput(attrs={'class': 'form-control maiuscula'}))
-    numeroIdentificacao = forms.CharField(max_length=40, widget=forms.TextInput(attrs={'class': 'form-control maiuscula'}))
-    autor = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    telefone = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    numeroIdentificacao = forms.CharField(max_length=40, required=False,widget=forms.TextInput(attrs={'class': 'form-control maiuscula'}))
+    autor = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    telefone = forms.CharField(max_length=30,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     numeroProcesso = forms.CharField(max_length=180, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     destinatario = forms.CharField(max_length=60,required=False,  widget=forms.TextInput( attrs={'class': 'form-control'}))
     arquivo = forms.FileField(required=False, widget=forms.TextInput(attrs={'type': 'file', 'class': 'form-control'}))
-    descricao = forms.CharField(max_length=510, widget=forms.Textarea(attrs={ 'class': 'form-control '}))
+    descricao = forms.CharField(max_length=510,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control '}))
     class Meta:
         model = Arquivo
         fields = ['tipologia','estado', 'departamentoDestino', 'dataEntrada','descricao',
