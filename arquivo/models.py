@@ -35,7 +35,7 @@ class Arquivo(models.Model):
     departamentoDestino = models.ForeignKey(Departamento, on_delete=models.CASCADE, parent_link=True)
     descricao = models.CharField(max_length=670, blank=True, null=True)
     numeroProcesso = models.CharField(max_length=20, blank=True, null=True)
-    arquivo = models.FileField(upload_to="uploads/%Y/")
+    arquivo = models.FileField(upload_to="uploads/%Y/",blank=True, null=True)
     dataEntrada = models.DateField(default=timezone.now)
     created = models.DateField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
