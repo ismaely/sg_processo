@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-12 10:45:07
+@modify date 2022-05-18 10:07:26
 @desc [description]
 -->
 
@@ -39,7 +39,7 @@
                 ></a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="">Atualizar</a>
-                  <a class="dropdown-item" href="">Encaminhar</a>
+                  <a class="dropdown-item" href="" data-toggle="modal" data-target="#fullwindowModal">Visualizar Arquivo</a>
                   <a class="dropdown-item" href="">Solicitar Resposta</a>
                   <div class="dropdown-divider"></div>
                 </div>
@@ -51,6 +51,22 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+</div>
+<div class="modal fade full-window-modal" id="fullwindowModal" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fullwindowModalLabel">Visualização do Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div id="mapa2" class="" style="height: 550px"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
