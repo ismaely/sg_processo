@@ -17,10 +17,10 @@ def retornaDadosArquivo(request):
             lista = Arquivo.objects.get(id=int(id))
 
             dados = {'assunto': lista.assunto, 'descricao':lista.descricao,
-            'arquivo': json.dumps(lista.arquivo), 'dataEntrada': lista.dataEntrada
+            'arquivo': str(lista.arquivo), 'dataEntrada': lista.dataEntrada
             }
             status =200
-        return JsonResponse(dados,status)
+        return JsonResponse(dados)
     except ValueError:
+        return JsonResponse({'sucess':False},status=400)
 
-        print(" ERRO RETORNO DOS DADOS DO ARQUIVO")

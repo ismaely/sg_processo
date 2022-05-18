@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-18 14:20:54
+@modify date 2022-05-19 00:54:23
 @desc [description]
 -->
 
@@ -34,9 +34,9 @@
           <td>
             <ul class="nav nav-pills">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
-                  >Acção <i class="ik ik-chevron-down"></i
-                ></a>
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                  >Acção <i class="ik ik-chevron-down"></i>
+                </a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="">Atualizar</a>
                   <a class="dropdown-item" href="#" onclick="visualizarArquivo({{ dados.id }})">Visualizar Arquivo</a>
@@ -63,7 +63,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <embed src="/media/{{ dados.arquivo }}" type="application/pdf" ></embed> 
+        <embed id="viewPdf" src="" type="application/pdf" ></embed> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -99,8 +99,9 @@
           "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         },
         success: function (data) {
-          alert("Success!");
-          console.log(data.resposta);
+          document.getElementById("viewPdf").src="media/"+data.arquivo;
+          $('#fullwindowModal').modal('show');
+          //console.log(data);
           // setTimeout("location.reload(true);", 1100); // 1.2  segundos
           //window.location.reload();
         },
