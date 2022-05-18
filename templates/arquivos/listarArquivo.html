@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-18 10:07:26
+@modify date 2022-05-18 14:20:54
 @desc [description]
 -->
 
@@ -39,7 +39,7 @@
                 ></a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="">Atualizar</a>
-                  <a class="dropdown-item" href="" data-toggle="modal" data-target="#fullwindowModal">Visualizar Arquivo</a>
+                  <a class="dropdown-item" href="#" onclick="visualizarArquivo({{ dados.id }})">Visualizar Arquivo</a>
                   <a class="dropdown-item" href="">Solicitar Resposta</a>
                   <div class="dropdown-divider"></div>
                 </div>
@@ -48,11 +48,13 @@
           </td>
           <td></td>
         </tr>
+
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+
 <div class="modal fade full-window-modal" id="fullwindowModal" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -61,7 +63,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <div id="mapa2" class="" style="height: 550px"></div>
+        <embed src="/media/{{ dados.arquivo }}" type="application/pdf" ></embed> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -69,4 +71,45 @@
     </div>
   </div>
 </div>
+<script>
+ function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function visualizarArquivo(id) {
+      $.ajax({
+        url: "/ajax/retornaDadosArquivo/",
+        type: "POST",
+        data: JSON.stringify({ id: id }),
+        dataType: "json",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        success: function (data) {
+          alert("Success!");
+          console.log(data.resposta);
+          // setTimeout("location.reload(true);", 1100); // 1.2  segundos
+          //window.location.reload();
+        },
+        error: function () {
+
+          console.log("erro ao aprovar inscricao" + data);
+        },
+      });
+    }
+</script>
+
 {% endblock %}
