@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('utilizador.urls')),
     path('home/', include('home.urls')),
     path('arquivo', include('arquivo.urls')),
+    path('ajax', include('ajax.urls')),
     path('admin/', admin.site.urls),
 
 
