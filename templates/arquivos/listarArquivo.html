@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-19 09:53:15
+@modify date 2022-05-19 16:27:20
 @desc [description]
 -->
 
@@ -39,7 +39,7 @@
                 </a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="">Atualizar</a>
-                  <a class="dropdown-item" href="#" onclick="visualizarArquivo({{ dados.id }})">Visualizar Arquivo</a>
+                  <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank" >Visualizar Arquivo</a>
                   <a class="dropdown-item" href="">Solicitar Resposta</a>
                   <div class="dropdown-divider"></div>
                 </div>
@@ -52,6 +52,8 @@
         {% endfor %}
       </tbody>
     </table>
+
+    
   </div>
 </div>
 
@@ -62,7 +64,11 @@
         <h5 class="modal-title" id="fullwindowModalLabel">Visualização do Documento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body"></div>
+      <div class="modal-body">
+        <div class="" >
+          <embed id="showPdf" src="{{ MEDIA_URL }}uploads/2022/pedro-escola.pdf"  type="application/pdf"></embed>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -97,9 +103,8 @@
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       },
       success: function (data) {
-        console.log(data.arquivo.toString());
-        //document.getElementById("viewPdf").src="media/"+data.arquivo;
-        //document.getElementById("viewPdf").innerHTML = '<embed type="application/pdf" src="media/' + data.arquivo + '"</embed>';
+      console.log(data.arquivo.toString());
+        //PDFObject.embed("media/" + data.arquivo.toString(), "#showPdf");
         $("#fullwindowModal").modal("show");
         //console.log(data);
         // setTimeout("location.reload(true);", 1100); // 1.2  segundos

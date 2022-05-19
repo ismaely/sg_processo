@@ -1,11 +1,20 @@
 from multiprocessing import context
+from django.http import JsonResponse, HttpRequest,FileResponse,HttpResponse
 from django.db.models import Q
+import os, json
 from django.shortcuts import render
 from arquivo.models import Arquivo
 from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form
 
 
 
+def show_pdf(request, pk):
+    filepath = ""
+    if pk is not None:
+        lista = Arquivo.objects.get(id=int(pk))
+        filepath = os.path.join('media', str(lista.arquivo))
+        
+    return HttpResponse(open(filepath, 'rb'), content_type='application/pdf')
 
 
 def listar_arquivos(request):

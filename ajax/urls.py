@@ -3,5 +3,5 @@ from . import views
 
 app_name = 'ajax'
 urlpatterns = [
-    path('retornaDadosArquivo/', views.retornaDadosArquivo, name="retorna-dados-arquivo"),
+    path('retornaDadosArquivo/', views.show_pdf, name="retorna-dados-arquivo"),
 ]
