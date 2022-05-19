@@ -28,10 +28,11 @@ class Arquivo_Form(ModelForm):
     destinatario = forms.CharField(max_length=60,required=False,  widget=forms.TextInput( attrs={'class': 'form-control'}))
     arquivo = forms.FileField(required=False, widget=forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}))
     descricao = forms.CharField(max_length=510,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control '}))
+    foto = forms.CharField(required=False, widget=forms.TextInput(attrs={'type':'hidden', 'class': 'form-control', 'id': 'fotoSalva'}))
     class Meta:
         model = Arquivo
-        fields = ['tipologia','estado', 'departamentoDestino', 'dataEntrada','descricao',
-         'assunto', 'numero_pagina','autor','numeroProcesso', 'destinatario','numeroIdentificacao', 'arquivo']
+        fields = ['tipologia','estado', 'departamentoDestino', 'dataEntrada','descricao','assunto', 'numero_pagina',
+         'autor','numeroProcesso', 'destinatario','numeroIdentificacao', 'arquivo', 'foto']
 
         widgets = {
             'tipologia': forms.Select(attrs={'class': 'form-control'}),

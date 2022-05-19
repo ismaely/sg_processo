@@ -40,7 +40,7 @@ class Arquivo(models.Model):
     created = models.DateField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     numeroIdentificacao = models.CharField(max_length=20, blank=True, null=True)
-
+    foto = models.ImageField(upload_to='fotos/', blank=True, null=True, default="user.jpg")
     class Meta:
         ordering = ['assunto']
     def __str__ (self):
