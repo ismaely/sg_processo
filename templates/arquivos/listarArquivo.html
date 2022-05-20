@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-19 16:27:20
+@modify date 2022-05-20 11:22:43
 @desc [description]
 -->
 
@@ -39,6 +39,7 @@
                 </a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="">Atualizar</a>
+                  <a class="dropdown-item"  href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"> Descrição</a>
                   <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank" >Visualizar Arquivo</a>
                   <a class="dropdown-item" href="">Solicitar Resposta</a>
                   <div class="dropdown-divider"></div>
@@ -56,6 +57,31 @@
     
   </div>
 </div>
+<div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editLayoutItemLabel">Descrição do Arquivo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+              <p class="lead">Nullam elementum aliquam porta.</p>
+              <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus fermentum imperdiet ligula, et mollis quam sagittis ac. In quis interdum sem. Vivamus blandit fringilla hendrerit. Suspendisse vulputate sapien vitae mi convallis dictum. Sed blandit felis ut quam accumsan, at condimentum nibh varius. Mauris ornare ultricies ipsum.</p>
+              <!--<div class="row">
+                  <div class="col-md-6"><img src="../img/portfolio-1.jpg" class="img-fluid" alt=""></div>
+                  <div class="col-md-6"><img src="../img/portfolio-8.jpg" class="img-fluid" alt=""></div>
+              </div>-->
+              <div class="jumbotron pt-30 pb-30 mt-30">
+                  <h2 class="mt-0">Hello, world!</h2>
+                  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>
+        
+        
 
 <div class="modal fade full-window-modal" id="fullwindowModal" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
