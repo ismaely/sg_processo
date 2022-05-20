@@ -10,10 +10,12 @@ from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form
 
 def show_pdf(request, pk):
     filepath = ""
+    context = ""
     if pk is not None:
         lista = Arquivo.objects.get(id=int(pk))
         filepath = os.path.join('media', str(lista.arquivo))
-        
+
+        fs = open(filepath, 'rb')
     return HttpResponse(open(filepath, 'rb'), content_type='application/pdf')
 
 
