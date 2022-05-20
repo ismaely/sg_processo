@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-27 15:12:32
-@modify date 2022-05-12 15:57:37
+@modify date 2022-05-20 15:21:00
 @desc [description]
 -->
 
@@ -15,16 +15,17 @@
         showSuccessToast();
       });
     </script>
-
     {% endif %}
     <div class="card">
-      {% if sucesso %}
-      <span class=""> </span>
-      {% endif %}
+      {% if pk %}
+     <div class="card-header"><h3>Atualizar Dados do Arquivo</h3></div>
+      <div class="card-body">
+        <form id="regForm" class="forms-sample" action="{% url 'arquivo:atualizar-dados' pk %}" method="POST" enctype="multipart/form-data">
+      {% else %}
       <div class="card-header"><h3>Entrada do Processo</h3></div>
       <div class="card-body">
         <form id="regForm" class="forms-sample" action="{% url 'arquivo:registar-entrada-processo' %}" method="POST" enctype="multipart/form-data">
-          {% csrf_token %} {% autoescape on %}
+         {% endif %} {% csrf_token %} {% autoescape on %}
           <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
           <div class="tab">
             <div class="row">

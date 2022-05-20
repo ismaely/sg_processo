@@ -21,17 +21,18 @@ def show_pdf(request, pk):
 
 
 def atualizarDados(request, pk):
+    sucesso = False
     dados = Arquivo.objects.get(id=int(pk))
     form = Arquivo_Form(request.POST or None, instance=dados)
+    context = {'form': form, 'pk':pk}
     if request.method == "POST":
-            form = Arquivo_Form(request.POST, request.FILES)
+            form = Arquivo_Form(request.POST or None, request.FILES, instance=dados)
             if form.is_valid():
                 form.save()
-                sucesso = True
-                context = {'dados':form.cleaned_data, 'sucesso': sucesso}
-                return render (request, 'arquivos/reciboEntrada.html', context)
-            
-    context = {'form': form, 'pk':pk}
+                #context = {'dados':form.cleaned_data, 'sucesso': sucesso}
+                #return render (request, 'arquivos/reciboEntrada.html', context)
+                form = Arquivo_Form()
+                context = {'form': form, 'sucesso':True}
     return render (request, 'arquivos/registarProcesso.html', context)
 
 
