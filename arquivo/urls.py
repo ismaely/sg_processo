@@ -8,4 +8,5 @@ urlpatterns = [
     path('atribuirNumeroProcesso', views.atribuirNumeroProcesso, name='atribuir-numero-processo'),
     path('numeroProcesso/<int:pk>/', views.numeroProcesso, name='numero-processo'),
     path('show_pdf/<int:pk>/', views.show_pdf, name='show-pdf'),
+    path('atualizarDados/<int:pk>/', views.atualizarDados, name='atualizar-dados'),
 ]

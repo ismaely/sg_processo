@@ -10,19 +10,19 @@ def retornaDadosArquivo(request):
     try:
         dados = dict()
         if request.method == 'POST':
-            
             valor = []
             valor = request.body.decode('utf-8')
             valor = json.loads(valor)
             id = valor['id']
             lista = Arquivo.objects.get(id=int(id))
-
             dados = {'assunto': lista.assunto, 'descricao':lista.descricao,
             'arquivo': str(lista.arquivo), 'dataEntrada': lista.dataEntrada
             }
             status =200
+            
         return JsonResponse(dados)
     except ValueError:
+        print(ValueError)
         return JsonResponse({'sucess':False},status=400)
 
 

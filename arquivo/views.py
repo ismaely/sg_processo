@@ -19,6 +19,22 @@ def show_pdf(request, pk):
     return HttpResponse(open(filepath, 'rb'), content_type='application/pdf')
 
 
+
+def atualizarDados(request, pk):
+    dados = Arquivo.objects.get(id=int(pk))
+    form = Arquivo_Form(request.POST or None, instance=dados)
+    if request.method == "POST":
+            form = Arquivo_Form(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                sucesso = True
+                context = {'dados':form.cleaned_data, 'sucesso': sucesso}
+                return render (request, 'arquivos/reciboEntrada.html', context)
+            
+    context = {'form': form, 'pk':pk}
+    return render (request, 'arquivos/registarProcesso.html', context)
+
+
 def listar_arquivos(request):
     form = Consultar_form(request.POST or None)
     if request.method == "POST":
