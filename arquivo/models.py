@@ -41,7 +41,20 @@ class Arquivo(models.Model):
     updated = models.DateTimeField(auto_now_add=True)
     numeroIdentificacao = models.CharField(max_length=20, blank=True, null=True)
     foto = models.ImageField(upload_to='fotos/', blank=True, null=True, default="user.jpg")
+    telefone = models.CharField(max_length=20, blank=True, null=True)
     class Meta:
         ordering = ['assunto']
     def __str__ (self):
         return self.id
+
+
+class Resposta(models.Model):
+    arquivo = models.ForeignKey(Topologia, on_delete=models.CASCADE, parent_link=True)
+    resposta = models.CharField(max_length=2, blank=True, null=True)
+    detalhe = models.CharField(max_length=190, blank=True, null=True)
+    dataEntrada = models.DateField(default=timezone.now)
+    created = models.DateField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    
+    def __str__ (self):
+        return self.arquivo

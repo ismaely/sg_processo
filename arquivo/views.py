@@ -1,7 +1,8 @@
 from multiprocessing import context
-from django.http import JsonResponse, HttpRequest,FileResponse,HttpResponse
+from django.http import JsonResponse, HttpRequest,FileResponse,HttpResponse,HttpResponseRedirect
 from django.db.models import Q
 import os, json
+from django.urls import reverse
 from django.shortcuts import render
 from arquivo.models import Arquivo
 from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form
@@ -31,8 +32,9 @@ def atualizarDados(request, pk):
                 form.save()
                 #context = {'dados':form.cleaned_data, 'sucesso': sucesso}
                 #return render (request, 'arquivos/reciboEntrada.html', context)
-                form = Arquivo_Form()
-                context = {'form': form, 'sucesso':True}
+                #form = Arquivo_Form()
+                #context = {'form': form, 'sucesso':True}
+                return HttpResponseRedirect(reverse('home:dashboard'))
     return render (request, 'arquivos/registarProcesso.html', context)
 
 

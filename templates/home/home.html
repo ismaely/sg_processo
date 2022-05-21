@@ -63,6 +63,16 @@
   </div>
 </div>
 
-<div class="row"></div>
+<div class="row">
+  <div class="col-sm-12">
+    {% if sucesso %}
+    <script language="JavaScript">
+      $(function () {
+        showSuccessToast();
+      });
+    </script>
+    {% endif %}
+  </div>
+</div>
 
 {% endblock %}
