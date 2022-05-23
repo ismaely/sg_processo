@@ -51,18 +51,17 @@ def listar_arquivos(request):
             
             if bi and categoria and estado and dataEntrada:
                 
-                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(tipologia=categoria)|
-                Q(estado=estado))
+                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(tipologia=categoria)|Q(estado=estado)|Q(dataEntrada=dataEntrada))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
             
             elif bi and categoria and dataEntrada:
-                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(tipologia=categoria))
+                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(tipologia=categoria)|Q(dataEntrada=dataEntrada))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
             
             elif bi and estado and dataEntrada:
-                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(estado=estado))
+                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(estado=estado)|Q(dataEntrada=dataEntrada))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
 
@@ -74,13 +73,13 @@ def listar_arquivos(request):
            
             elif categoria and dataEntrada:
                 
-                lista = Arquivo.objects.select_related('estado').filter(Q(tipologia=categoria)|Q(estado=estado))
+                lista = Arquivo.objects.select_related('estado').filter(Q(tipologia=categoria)|Q(dataEntrada=dataEntrada))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
             
             elif estado and dataEntrada:
                 
-                lista = Arquivo.objects.select_related('estado').filter(Q(tipologia=categoria)|Q(estado=estado))
+                lista = Arquivo.objects.select_related('estado').filter(Q(dataEntrada=dataEntrada)|Q(estado=estado))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
 
@@ -90,12 +89,12 @@ def listar_arquivos(request):
                 return render (request, 'arquivos/listarArquivo.html', context)
             
             elif bi and dataEntrada:
-                lista = Arquivo.objects.select_related('estado').filter(QnumeroIdentificacao=bi)
+                lista = Arquivo.objects.select_related('estado').filter(Q(numeroIdentificacao=bi)|Q(dataEntrada=dataEntrada))
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
 
             elif bi:
-                lista = Arquivo.objects.select_related('estado').filter(QnumeroIdentificacao=bi)
+                lista = Arquivo.objects.select_related('estado').filter(numeroIdentificacao=bi)
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
     

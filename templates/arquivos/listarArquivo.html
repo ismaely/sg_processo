@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-20 14:23:24
+@modify date 2022-05-23 17:39:39
 @desc [description]
 -->
 
@@ -41,7 +41,7 @@
                   <a class="dropdown-item" href="{% url 'arquivo:atualizar-dados' dados.id  %}">Atualizar</a>
                   <a class="dropdown-item" href="#" onclick="detalhesArquivo({{ dados.id }})"> Descrição</a>
                   <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank">Visualizar Arquivo</a>
-                  <a class="dropdown-item" href="#">Solicitar Resposta</a>
+                  <a class="dropdown-item" href="#" onclick="solicitacaoResposta({{ dados.id }})" data-toggle="modal" data-target="#respostaModal">Solicitar Resposta</a>
                   <div class="dropdown-divider"></div>
                 </div>
               </li>
@@ -79,6 +79,22 @@
   </div>
 </div>
 
+<div class="modal fade" id="respostaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body" id="mensagem">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   function getCookie(name) {
     var cookieValue = null;
@@ -96,7 +112,6 @@
     return cookieValue;
   }
   function detalhesArquivo(id) {
-    console.log(id);
     $.ajax({
       url: "/ajax/retornaDadosArquivo/",
       type: "POST",
@@ -110,6 +125,28 @@
       success: function (data) {
         document.getElementById("descricao").innerHTML = "<p><h4>" + data.descricao + "</h4></p>";
         $("#editLayoutItem").modal("show");
+      },
+      error: function () {
+        console.log("erro ao aprovar inscricao" + data);
+      },
+    });
+  }
+
+  // função que vai solicitar uma resposta do arquivo
+  function solicitacaoResposta(id) {
+    $.ajax({
+      url: "/ajax/solicitacaoResposta/",
+      type: "POST",
+      data: JSON.stringify({ id: id }),
+      dataType: "json",
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      success: function (data) {
+        //document.getElementById("descricao").innerHTML = "<p><h4>" + data.descricao + "</h4></p>";
+        $("#respostaModal").modal("show");
       },
       error: function () {
         console.log("erro ao aprovar inscricao" + data);
