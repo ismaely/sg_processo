@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from arquivo.models import Departamento
 
 
 # Create your models here.
@@ -23,6 +24,7 @@ class Utilizador(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, parent_link=True)
     ndi = models.CharField(max_length=40)
     telefone = models.CharField(max_length=50,blank=True, null=True)
+    departamentoDestino = models.ForeignKey(Departamento, on_delete=models.CASCADE, parent_link=True)
     foto = models.ImageField(upload_to='user/', blank=True, null=True, default="user.jpg")
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
