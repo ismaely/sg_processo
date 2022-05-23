@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-23 18:14:34
+@modify date 2022-05-23 18:19:02
 @desc [description]
 -->
 
@@ -42,7 +42,7 @@
                   <a class="dropdown-item" href="#" onclick="detalhesArquivo({{ dados.id }})"> Descrição</a>
                   <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank">Visualizar Arquivo</a>
                   <a class="dropdown-item" href="#" onclick="solicitacaoResposta({{ dados.id }})" data-toggle="modal" data-target="#respostaModal">Solicitar Resposta</a>
-                  <a class="dropdown-item" href="#" ">Responder</a>
+                  <a class="dropdown-item" href="{% url 'arquivo:responder-arquivo' dados.id  %}" ">Responder</a>
                   <div class="dropdown-divider"></div>
                 </div>
               </li>

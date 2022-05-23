@@ -128,6 +128,17 @@ def numeroProcesso(request, pk):
     return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
 
+def responderArquivo(request, pk):
+    #form = NumeroProcesso_form(request.POST or None)
+    if request.method == "POST":
+        lista = Arquivo.objects.get(id=pk)
+        # lista.numeroProcesso=
+        context = {}
+        return render (request, 'arquivos/listarNumeroProcesso.html', context)
+
+    context = {}
+    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
+
 
 
 #@login_required -> True if you want to love..
