@@ -36,10 +36,9 @@ def solicitacaoResposta(request):
             id = valor['id']
             lista = Resposta.objects.get(id=int(id))
             if lista.id:
-                dados = {'msg': 'Já existe uma solicitação da Resposta, Aguarde!'}
+                dados = {'msg': 'Já existe uma solicitação! Aguarde a Resposta'}
         return JsonResponse(dados)
     except Resposta.DoesNotExist:
-        print("novo ----")
         Resposta.objects.create(arquivo_id=id,solicitacao=True)
         dados = {'msg': 'Solicitação feita com sucesso! Aguarde a resposta em breve'}
         return JsonResponse(dados)
