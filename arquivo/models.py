@@ -25,6 +25,13 @@ class Departamento(models.Model):
         return self.nome
 
 
+class TipoResposta(models.Model):
+    nome = models.CharField(max_length=100)
+    detalhe = models.CharField(max_length=100, blank=True, null=True)
+    def __str__ (self):
+        return self.nome
+
+
 class Arquivo(models.Model):
     tipologia = models.ForeignKey(Topologia, on_delete=models.CASCADE, parent_link=True)
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE, parent_link=True)
@@ -49,9 +56,10 @@ class Arquivo(models.Model):
 
 
 class Resposta(models.Model):
-    arquivo = models.ForeignKey(Topologia, on_delete=models.CASCADE, parent_link=True)
-    resposta = models.CharField(max_length=2, blank=True, null=True)
-    detalhe = models.CharField(max_length=190, blank=True, null=True)
+    arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE, parent_link=True)
+    tipoResposta = models.ForeignKey(TipoResposta, on_delete=models.DO_NOTHING, blank=True, null=True, parent_link=True)
+    msg = models.CharField(max_length=790, blank=True, null=True)
+    solicitacao = models.CharField(max_length=2, blank=True, null=True)
     dataEntrada = models.DateField(default=timezone.now)
     created = models.DateField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
