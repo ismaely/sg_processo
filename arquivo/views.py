@@ -137,7 +137,7 @@ def responderArquivo(request, pk):
         return render (request, 'arquivos/listarNumeroProcesso.html', context)
 
     context = {}
-    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
+    return render (request, 'arquivos/responderArquivo.html', context)
 
 
 
