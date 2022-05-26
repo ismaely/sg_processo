@@ -2,16 +2,56 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-23 18:30:45
+@modify date 2022-05-26 01:17:25
 @desc [description]
 -->
 
 {% extends 'base.html' %}{% block corpo %}{% load static %}
-<div class="card">
-  <div class="card-header row"><h3>Responder a Solicitação</h3></div>
-  <div class="card-body">
-    <embed type="application/pdf" src="/media/u{{ name }}" width="500px" height="678px" /></embed>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h3>Responder a Solicitação</h3></div>
+      <div class="card-body">
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputTitle">Title</label>
+            <input type="text" class="form-control" id="exampleInputTitle" placeholder="Name" value="Donec felis urna, commodo eget velit interdum, malesuada lacinia eros." />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputSubtitle">Subtitle</label>
+            <input type="text" class="form-control" id="exampleInputSubtitle" placeholder="Name" value="Nullam elementum aliquam porta." />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Description</label>
+            <textarea class="form-control html-editor" rows="10">
+                  <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus fermentum imperdiet ligula, et mollis quam sagittis ac. In quis interdum sem. Vivamus blandit fringilla hendrerit. Suspendisse vulputate sapien vitae mi convallis dictum. Sed blandit felis ut quam accumsan, at condimentum nibh varius. Mauris ornare ultricies ipsum.</p>
+                  <div class="jumbotron pt-30 pb-30 mt-30">
+                      <h2 class="mt-0">Hello, world!</h2>
+                      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                  </div>
+                  <p>Praesent eleifend ac felis dignissim mattis. Suspendisse eget congue enim, ac fermentum risus. Donec eget risus lacus. Nullam nec lectus quis tortor ultrices consectetur. Etiam dui erat, tristique vel quam a, maximus porttitor enim. Ut molestie turpis in est iaculis, ut congue massa porta.</p>
+              </textarea
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Images upload</label>
+            <input type="file" name="img[]" class="file-upload-default" />
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" />
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-right">
+        <button type="submit" class="btn btn-secondary mr-2">Save Changes</button>
+        <button class="btn btn-dark">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>
-
 {% endblock %}
