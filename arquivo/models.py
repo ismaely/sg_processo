@@ -59,10 +59,11 @@ class Resposta(models.Model):
     arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE, parent_link=True)
     tipoResposta = models.ForeignKey(TipoResposta, on_delete=models.DO_NOTHING, blank=True, null=True, parent_link=True)
     msg = models.CharField(max_length=790, blank=True, null=True)
+    titulo = models.CharField(max_length=200, blank=True, null=True)
     solicitacao = models.BooleanField(blank=True, null=True)
     dataEntrada = models.DateField(default=timezone.now)
     created = models.DateField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     
     def __str__ (self):
-        return self.arquivo
+        return self.id

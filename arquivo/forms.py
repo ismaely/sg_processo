@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from arquivo.models import Arquivo, Topologia, Estado
+from arquivo.models import Arquivo, Topologia, Estado, Resposta
 
 
 
@@ -33,6 +33,26 @@ class Arquivo_Form(ModelForm):
         model = Arquivo
         fields = ['tipologia','estado', 'departamentoDestino', 'dataEntrada','descricao','assunto', 'numero_pagina',
          'autor','numeroProcesso', 'destinatario','numeroIdentificacao', 'arquivo', 'foto']
+
+        widgets = {
+            'tipologia': forms.Select(attrs={'class': 'form-control'}),
+            'estado': forms.Select( attrs={'class': 'form-control'}),
+            'departamentoDestino': forms.Select( attrs={'class': 'form-control'}),
+            'dataEntrada': forms.DateInput(attrs={'type': 'date','class': 'form-control'}),
+        }
+
+
+
+class Resposta_Form(ModelForm):
+    assunto = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control '}))
+    numero_pagina = forms.CharField(max_length=40,required=False, widget=forms.TextInput(attrs={'class': 'form-control maiuscula'}))
+    autor = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    arquivo = forms.FileField(required=False, widget=forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}))
+    descricao = forms.CharField(max_length=510,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control '}))
+    foto = forms.CharField(required=False, widget=forms.TextInput(attrs={'type':'hidden', 'class': 'form-control', 'id': 'fotoSalva'}))
+    class Meta:
+        model = Arquivo
+        fields = ['tipologia','autor','numeroProcesso', 'destinatario','numeroIdentificacao', 'arquivo', 'foto']
 
         widgets = {
             'tipologia': forms.Select(attrs={'class': 'form-control'}),

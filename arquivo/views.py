@@ -133,10 +133,10 @@ def responderArquivo(request, pk):
     if request.method == "POST":
         lista = Arquivo.objects.get(id=pk)
         # lista.numeroProcesso=
-        context = {}
-        return render (request, 'arquivos/listarNumeroProcesso.html', context)
+        print(request.POST)
+    
 
-    context = {}
+    context = {'pk':pk}
     return render (request, 'arquivos/responderArquivo.html', context)
 
 
