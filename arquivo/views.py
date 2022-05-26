@@ -5,7 +5,7 @@ import os, json
 from django.urls import reverse
 from django.shortcuts import render
 from arquivo.models import Arquivo
-from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form
+from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form,Resposta_Form
 
 
 
@@ -15,10 +15,43 @@ def show_pdf(request, pk):
     if pk is not None:
         lista = Arquivo.objects.get(id=int(pk))
         filepath = os.path.join('media', str(lista.arquivo))
-
         fs = open(filepath, 'rb')
     return HttpResponse(open(filepath, 'rb'), content_type='application/pdf')
 
+
+def atribuirNumeroProcesso(request):
+    form = NumeroProcesso_form(request.POST or None)
+    if request.method == "POST":
+        bi = request.POST['numeroIdentificacao']
+        lista = Arquivo.objects.filter(numeroIdentificacao=bi)
+        context = {'lista': lista}
+        return render (request, 'arquivos/listarNumeroProcesso.html', context)
+    context = {'form': form}
+    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
+
+
+def numeroProcesso(request, pk):
+    form = NumeroProcesso_form(request.POST or None)
+    if request.method == "POST":
+        lista = Arquivo.objects.get(id=pk)
+        # lista.numeroProcesso=
+        context = {}
+        return render (request, 'arquivos/listarNumeroProcesso.html', context)
+
+    context = {'form': form}
+    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
+
+
+def responderArquivo(request, pk):
+    form = Resposta_Form(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            resp = form.save(commit=False)
+            #resp.arquivo = pk
+            #resp.save()ren
+
+    context = {'form': form,'pk':pk}
+    return render (request, 'arquivos/responderArquivo.html', context)
 
 
 def atualizarDados(request, pk):
@@ -101,43 +134,6 @@ def listar_arquivos(request):
     context = {'form':form}
     return render (request, 'arquivos/consultar.html', context)
 
-
-
-
-def atribuirNumeroProcesso(request):
-    form = NumeroProcesso_form(request.POST or None)
-    if request.method == "POST":
-        bi = request.POST['numeroIdentificacao']
-        lista = Arquivo.objects.filter(numeroIdentificacao=bi)
-        context = {'lista': lista}
-        return render (request, 'arquivos/listarNumeroProcesso.html', context)
-
-    context = {'form': form}
-    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
-
-
-def numeroProcesso(request, pk):
-    form = NumeroProcesso_form(request.POST or None)
-    if request.method == "POST":
-        lista = Arquivo.objects.get(id=pk)
-        # lista.numeroProcesso=
-        context = {}
-        return render (request, 'arquivos/listarNumeroProcesso.html', context)
-
-    context = {'form': form}
-    return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
-
-
-def responderArquivo(request, pk):
-    #form = NumeroProcesso_form(request.POST or None)
-    if request.method == "POST":
-        lista = Arquivo.objects.get(id=pk)
-        # lista.numeroProcesso=
-        print(request.POST)
-    
-
-    context = {'pk':pk}
-    return render (request, 'arquivos/responderArquivo.html', context)
 
 
 

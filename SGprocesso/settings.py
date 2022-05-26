@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-ah#72*fcjnw=qriu$%p*pme5b30+^-2pcd3=p(kd77vh!%99(9
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+ATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
 # Application definition
 

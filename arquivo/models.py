@@ -58,7 +58,7 @@ class Arquivo(models.Model):
 class Resposta(models.Model):
     arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE, parent_link=True)
     tipoResposta = models.ForeignKey(TipoResposta, on_delete=models.DO_NOTHING, blank=True, null=True, parent_link=True)
-    msg = models.CharField(max_length=790, blank=True, null=True)
+    msg = models.CharField(max_length=10990, blank=True, null=True)
     titulo = models.CharField(max_length=200, blank=True, null=True)
     solicitacao = models.BooleanField(blank=True, null=True)
     dataEntrada = models.DateField(default=timezone.now)

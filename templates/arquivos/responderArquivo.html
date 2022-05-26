@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-26 02:40:36
+@modify date 2022-05-26 03:29:14
 @desc [description]
 -->
 
@@ -16,21 +16,33 @@
         <form class="forms-sample" action="{% url 'arquivo:responder-arquivo' pk %}" method="POST">
           {% csrf_token %}
           <div class="form-group">
-            <label for="exampleInputTitle">Title</label>
-            <input type="text" class="form-control" id="exampleInputTitle" placeholder="Name" value="Donec felis urna, commodo eget velit interdum, malesuada lacinia eros." />
+            <label for="exampleInputTitle">Titulo</label>
+            {{ form.titulo }}{{ form.titulo.errors }}
           </div>
-          <div class="form-group">
-            <label for="exampleInputSubtitle">Subtitle</label>
-            <input type="text" class="form-control" id="exampleInputSubtitle" placeholder="Name" value="Nullam elementum aliquam porta." />
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputSubtitle">Situação</label>
+                {{ form.tipoResposta }} {{ form.tipoResposta.errors }}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">Data de Resolução</label>
+                {{ form.dataEntrada }} {{ form.dataEntrada.errors }}
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword4">Description</label>
-            <textarea class="form-control html-editor" rows="10" name="msg">
-                  <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus fermentum imperdiet ligula, et mollis quam sagittis ac. In quis interdum sem. Vivamus blandit fringilla hendrerit. Suspendisse vulputate sapien vitae mi convallis dictum. Sed blandit felis ut quam accumsan, at condimentum nibh varius. Mauris ornare ultricies ipsum.</p>
-                  
-                  <p>Praesent eleifend ac felis dignissim mattis. Suspendisse eget congue enim, ac fermentum risus. Donec eget risus lacus. Nullam nec lectus quis tortor ultrices consectetur. Etiam dui erat, tristique vel quam a, maximus porttitor enim. Ut molestie turpis in est iaculis, ut congue massa porta.</p>
-              </textarea
-            >
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div class="form-group">
+                <label for="exampleInputPassword4">Description</label>
+
+                {{ form.msg }} {{ form.msg.errors }}
+              </div>
+            </div>
           </div>
           <!--
           <div class="form-group">
