@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: dev
-      url: 'sistema-arquivos.com'
+      url: 'www.XsofArquivo.com'
     needs: build
     steps:
       - name: Run a one-line script
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: deploy
-      url: 'sistema-arquivos.com'
+      url: 'www.XsofArquivo.com'
     needs: deploy-dev
     steps:
       - name: Run a one-line script
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      url: 'sistema-arquivos.com'
+      url: 'www.XsofArquivo.com'
     needs: deploy-deploy
     steps:
       - name: Run a one-line script
