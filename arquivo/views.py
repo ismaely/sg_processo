@@ -4,7 +4,7 @@ from django.db.models import Q
 import os, json
 from django.urls import reverse
 from django.shortcuts import render
-from arquivo.models import Arquivo
+from arquivo.models import Arquivo, Resposta
 from arquivo.forms import  Arquivo_Form, Consultar_form, NumeroProcesso_form,Resposta_Form
 
 
@@ -43,18 +43,34 @@ def numeroProcesso(request, pk):
 
 
 
-def responderArquivo(request, pk):
+def responderArquivo(request, pk):    
     form = Resposta_Form(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            lista = Arquivo.objects.select_related('estado').get(id=pk)
-            lista.estado = 4
-            lista.save()
+            msg = request.POST['msg']
+            titulo = request.POST['titulo']
+            tipoResposta = request.POST['tipoResposta']
+            data = request.POST['dataEntrada']
 
-            print(form.cleaned_data)
-            #resp = form.save(commit=False)
-            #resp.arquivo = pk
-            #resp.save()
+            lista = Arquivo.objects.select_related('estado').get(id=pk)
+            lista.estado_id = 4
+            lista.save()
+            try:
+               resp = Resposta.objects.get(arquivo_id=pk)
+               resp.msg = msg
+               resp.titulo = titulo
+               resp.tipoResposta_id = tipoResposta
+               resp.dataEntrada = data
+               resp.solicitacao = False
+               resp.save()
+            
+            except Resposta.DoesNot:
+                resp = form.save(commit=False)
+                resp.solicitacao = False
+                resp.save()
+
+            context = {'dados':lista,'form':form}
+            return render (request, 'arquivos/sucessoResposta.html')
 
     context = {'form': form,'pk':pk}
     return render (request, 'arquivos/responderArquivo.html', context)
