@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-23 05:41:23
-@modify date 2022-06-04 16:17:36
+@modify date 2022-06-06 22:15:25
 @desc [description]
 -->
 
@@ -102,15 +102,16 @@
             <div class="nav-container">
               <nav id="main-menu-navigation" class="navigation-main">
                 <div class="nav-item active">
-                  <a href="#"><i class="ik ik-bar-chart-2"></i><span>MENU</span></a>
-                </div>
-                <div class="nav-lavel"></div>
+                  <a href="#"><i class="ik ik-bar-chart-2"></i><span>MENU</span></a>                    <a href="" class="menu-item">Listar </a>
+
                 <div class="nav-item has-sub">
                   <div class="">
                     <a href="{% url 'arquivo:registar-entrada-processo' %}" class="menu-item">Registar Nova Entrada</a>
                     <a href="{% url 'arquivo:listar-arquivos' %}" class="menu-item">Listar Processos</a>
                     <a href="{% url 'arquivo:atribuir-numero-processo' %}" class="menu-item">Atribuir Número de Processo</a>
-                    <a href="{% url 'arquivo:listar-arquivos' %}" class="menu-item">Consultar</a>
+                    <a href="{% url 'arquivo:listar-arquivos' %}" class="menu-item">Consultar Processo</a>
+                    <a href="" class="menu-item">Criar Conta de Utilizador</a>
+                    <a href="" class="menu-item">Listar Conta de Utilizador</a>
                   </div>
                 </div>
                 <!--<div class="nav-lavel">DIRECTOR</div>

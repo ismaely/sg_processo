@@ -19,6 +19,7 @@ def show_pdf(request, pk):
     return HttpResponse(open(filepath, 'rb'), content_type='application/pdf')
 
 
+
 def atribuirNumeroProcesso(request):
     form = NumeroProcesso_form(request.POST or None)
     if request.method == "POST":
@@ -28,6 +29,7 @@ def atribuirNumeroProcesso(request):
         return render (request, 'arquivos/listarNumeroProcesso.html', context)
     context = {'form': form}
     return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
+
 
 
 def numeroProcesso(request, pk):
