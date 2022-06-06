@@ -2,14 +2,15 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-23 18:19:44
+@modify date 2022-06-06 19:24:40
 @desc [description]
 -->
 
 {% extends 'base.html' %}{% block corpo %}{% load static %}
 <div class="card">
-  <div class="card-header row"><h3><b>Listagem de Processos</b></h3></div>
+ 
   <div class="card-body">
+     <div class="card-header row"><h3><b>LISTA DE PROCESSO</b></h3></div>
     <table id="advanced_table" class="table">
       <thead>
         <tr>
@@ -40,7 +41,8 @@
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{% url 'arquivo:atualizar-dados' dados.id  %}">Atualizar</a>
                   <a class="dropdown-item" href="#" onclick="detalhesArquivo({{ dados.id }})"> Descrição</a>
-                  <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank">Visualizar Arquivo</a>
+                  <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank">Visualizar Arquivo de</br> Entrada</a>
+                  <a class="dropdown-item" href="{% url 'arquivo:show-pdf' dados.id  %}" target="_blank">Visualizar Arquivo de</br> Resposta</a>
                   <a class="dropdown-item" href="#" onclick="solicitacaoResposta({{ dados.id }})" data-toggle="modal" data-target="#respostaModal">Solicitar Resposta</a>
                   <a class="dropdown-item" href="{% url 'arquivo:responder-arquivo' dados.id  %}" ">Responder</a>
                   <div class="dropdown-divider"></div>
