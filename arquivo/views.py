@@ -47,6 +47,10 @@ def responderArquivo(request, pk):
     form = Resposta_Form(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
+            lista = Arquivo.objects.select_related('estado').get(id=pk)
+            lista.estado = 4
+            lista.save()
+
             print(form.cleaned_data)
             #resp = form.save(commit=False)
             #resp.arquivo = pk
