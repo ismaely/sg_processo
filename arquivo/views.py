@@ -42,13 +42,15 @@ def numeroProcesso(request, pk):
     return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
 
+
 def responderArquivo(request, pk):
     form = Resposta_Form(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            resp = form.save(commit=False)
+            print(form.cleaned_data)
+            #resp = form.save(commit=False)
             #resp.arquivo = pk
-            #resp.save()ren
+            #resp.save()
 
     context = {'form': form,'pk':pk}
     return render (request, 'arquivos/responderArquivo.html', context)
@@ -128,6 +130,11 @@ def listar_arquivos(request):
 
             elif bi:
                 lista = Arquivo.objects.select_related('estado').filter(numeroIdentificacao=bi)
+                context = {'lista':lista}
+                return render (request, 'arquivos/listarArquivo.html', context)
+            
+            elif estado:
+                lista = Arquivo.objects.select_related('estado').filter(estado=estado)
                 context = {'lista':lista}
                 return render (request, 'arquivos/listarArquivo.html', context)
     
