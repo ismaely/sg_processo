@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: dev
-      url: 'www.xsof.com'
+      url: 'https://www.heroku.xsof.com'
     needs: build
     steps:
       - name: Run a one-line script
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: deploy
-      url: 'xsof.com'
+      url: 'https://www.heroku.xsof.com'
     needs: deploy-dev
     steps:
       - name: Run a one-line script
