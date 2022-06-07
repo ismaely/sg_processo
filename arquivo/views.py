@@ -53,6 +53,7 @@ def responderArquivo(request, pk):
             titulo = request.POST['titulo']
             tipoResposta = request.POST['tipoResposta']
             data = request.POST['dataEntrada']
+            departamentoDestino = request.POST['departamentoDestino']
 
             lista = Arquivo.objects.select_related('estado').get(id=pk)
             lista.estado_id = 4
