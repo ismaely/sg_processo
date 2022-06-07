@@ -4,12 +4,12 @@ name: SG_PROCESSO_CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
-  #push:
-    #branches: [ "master" ]
-  #pull_request:
-    #branches: [ "master" ]
-  workflow_dispatch:
+  push:
+    branches: [deploy]
+  pull_request:
+    branches: [master]
+  
+  #workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,9 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Set up Python 3.10
-        uses: actions/setup-python@v2
         run: echo Hello, world!
         
   deploy-dev:
