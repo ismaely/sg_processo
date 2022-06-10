@@ -51,9 +51,9 @@ class Arquivo_Form(ModelForm):
 
 class Resposta_Form(ModelForm):
     titulo = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control '}))
-    msg = forms.CharField(max_length=10990,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control html-editor', 'rows':'12'}))
+    msg = forms.CharField(max_length=10990, widget=forms.Textarea(attrs={ 'class': 'form-control html-editor', 'rows':'12'}))
     arquivo = forms.CharField(max_length=4, required=False, widget=forms.TextInput(attrs={'class': 'form-control '}))
-    departamentoDestino = forms.CharField(max_length=160,required=False, widget=forms.Select(choices=DEPARTAMENTO, attrs={'class': 'form-control'}))
+    departamentoDestino = forms.CharField(max_length=160, widget=forms.Select(choices=DEPARTAMENTO, attrs={'class': 'form-control'}))
     class Meta:
         model = Resposta
         fields = ['tipoResposta','dataEntrada','msg', 'titulo']
