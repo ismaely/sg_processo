@@ -2,7 +2,7 @@
 @author [Gunza Ismael]
 @email [7ilip@gmail.com]
 @create date 2022-03-26 20:36:36
-@modify date 2022-05-26 03:29:14
+@modify date 2022-06-07 10:59:58
 @desc [description]
 -->
 
@@ -15,9 +15,20 @@
       <div class="card-body">
         <form class="forms-sample" action="{% url 'arquivo:responder-arquivo' pk %}" method="POST">
           {% csrf_token %}
-          <div class="form-group">
-            <label for="exampleInputTitle">Titulo</label>
-            {{ form.titulo }}{{ form.titulo.errors }}
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputTitle">Titulo</label>
+                {{ form.titulo }}{{ form.titulo.errors }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">Departamento de Destino</label>
+                {{ form.departamentoDestino }} {{ form.departamentoDestino.errors }}
+              </div>
+            </div>
           </div>
 
           <div class="row">

@@ -1,11 +1,12 @@
 from django import forms
 from django.forms import ModelForm
-from arquivo.models import Arquivo, Topologia, Estado, Resposta
+from arquivo.models import Arquivo, Topologia, Estado, Resposta, Departamento
 
 
 
 CATEGORIA = []
 ESTADO = []
+DEPARTAMENTO = []
 
 
 CATEGORIA.append(['', '---------'])
@@ -16,6 +17,11 @@ for x in Topologia.objects.all():
 ESTADO.append(['', '---------'])
 for x in Estado.objects.all():
     ESTADO.append([int(x.id), str(x.nome)])
+
+
+DEPARTAMENTO.append(['', '---------'])
+for x in Departamento.objects.all():
+    DEPARTAMENTO.append([int(x.id), str(x.nome)])
  
 
 class Arquivo_Form(ModelForm):
@@ -45,9 +51,9 @@ class Arquivo_Form(ModelForm):
 
 class Resposta_Form(ModelForm):
     titulo = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control '}))
-    msg = forms.CharField(max_length=10990,required=False, widget=forms.Textarea(attrs={ 'class': 'form-control html-editor', 'rows':'12'}))
+    msg = forms.CharField(max_length=10990, widget=forms.Textarea(attrs={ 'class': 'form-control html-editor', 'rows':'12'}))
     arquivo = forms.CharField(max_length=4, required=False, widget=forms.TextInput(attrs={'class': 'form-control '}))
-    
+    departamentoDestino = forms.CharField(max_length=160, widget=forms.Select(choices=DEPARTAMENTO, attrs={'class': 'form-control'}))
     class Meta:
         model = Resposta
         fields = ['tipoResposta','dataEntrada','msg', 'titulo']

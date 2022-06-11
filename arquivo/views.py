@@ -31,6 +31,12 @@ def atribuirNumeroProcesso(request):
     return render (request, 'arquivos/atribuirNumeroProcesso.html', context)
 
 
+def visualizarArquivoResposta(request, pk):
+
+    context = {}
+    return render (request, 'arquivos/reciboEntrada.html', context)
+
+
 
 def numeroProcesso(request, pk):
     form = NumeroProcesso_form(request.POST or None)
@@ -53,9 +59,11 @@ def responderArquivo(request, pk):
             titulo = request.POST['titulo']
             tipoResposta = request.POST['tipoResposta']
             data = request.POST['dataEntrada']
+            departamentoDestino = request.POST['departamentoDestino']
 
             lista = Arquivo.objects.select_related('estado').get(id=pk)
             lista.estado_id = 4
+            lista.departamentoDestino = departamentoDestino
             lista.save()
             try:
                resp = Resposta.objects.get(arquivo_id=pk)
