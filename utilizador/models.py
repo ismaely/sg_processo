@@ -31,3 +31,11 @@ class Utilizador(models.Model):
     
     def __str__ (self):
         return '%d' % (self.id)
+
+
+class Previlegios (models.Model):
+    nome = models.CharField(max_length=100)
+    sigla = models.CharField(max_length=3, blank=True, null=True, default=" ")
+    descricao = models.CharField(max_length=190, blank=True, null=True, default=" ")
+    def __str__(self):
+        return "%s" % (self.nome)
