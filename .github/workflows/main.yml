@@ -28,6 +28,5 @@ jobs:
    
       - name: executar os teste final
         run: |
-          cd SGprocesso
           python manage.py test
 
