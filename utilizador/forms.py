@@ -8,6 +8,7 @@ ENTIDADE = []
 for res in Entidade.objects.all():
     ENTIDADE.append([int(res.id), str(res.nome)])
 
+
 for res in Categoria.objects.all():
     CATEGORIA.append([int(res.id), str(res.nome)])
 
@@ -19,7 +20,6 @@ class Utilizador_Form(ModelForm):
     class Meta:
         model = Utilizador
         fields = ['telefone','ndi', 'foto']
-
         widgets = {
             #'genero': forms.Select( attrs={'class': 'form-control'}),
         }

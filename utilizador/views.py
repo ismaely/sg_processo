@@ -12,6 +12,13 @@ from config.views import prepara_foto
 from utilizador.models import Utilizador
 
 
+
+
+def loginUser(request):
+    context = {}
+    return render (request, 'utilizador/login.html', context)
+
+
 def index(request):
     form = LoginForm(request.POST or None)
     if request.method == 'POST':
@@ -43,10 +50,7 @@ def index(request):
     return render (request, 'utilizador/index.html', context)
 
 
-def loginUser(request):
-    context = {}
-    return render (request, 'utilizador/login.html', context)
-
+    
 
 #@login_required
 def criarContaUtilizador(request):
@@ -56,23 +60,28 @@ def criarContaUtilizador(request):
     if request.method == 'POST':
         form2 = Utilizador_Form(request.POST, request.FILES or None)
         if form.is_valid() and form2.is_valid():
-            foto = form2.cleaned_data.get('foto')
-            email = request.POST['email']
-            nome=request.POST['nome']
-            categoria=request.POST['categoria']
-            user = User.objects.create_user(username=nome, first_name=categoria,email=email, password=SENHA_PADRAO)
-            
-            utilizador = form2.save(commit=False)
-            if len(foto) > 0:
-                utilizador.foto = prepara_foto(request)
-            else:
-                utilizador.foto ='user.jpg'
+            try:
+                foto = form2.cleaned_data.get('foto')
+                email = request.POST['email']
+                nome=request.POST['nome']
+                categoria=request.POST['categoria']
+                user = User.objects.create_user(username=nome, first_name=categoria,email=email, password=SENHA_PADRAO)
+                
+                utilizador = form2.save(commit=False)
+                if len(foto) > 0:
+                    utilizador.foto = prepara_foto(request)
+                else:
+                    utilizador.foto ='user.jpg'
 
-            utilizador.user_id = user.id
-            utilizador.save()
-            sucesso = True
-            form = User_Form()
-            form2 = Utilizador_Form()
+                utilizador.user_id = user.id
+                utilizador.departamentoDestino_id =categoria
+                utilizador.save()
+                sucesso = True
+                form = User_Form()
+                form2 = Utilizador_Form()
+            except Exception as e:
+                print("falha no sistema")
+            
             """subject = 'PREI - CONTA CRIADA'
             message = 'A sua conta foi criada com sucesso sua Password: 2022.Prei@'
             from_email = settings.EMAIL_HOST_USER
