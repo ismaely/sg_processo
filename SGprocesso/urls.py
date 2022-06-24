@@ -26,6 +26,5 @@ urlpatterns = [
     path('ajax/', include('ajax.urls')),
     #path('utilizador/', include('utilizador.urls')),
     path('admin/', admin.site.urls),
-
-
+    
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
