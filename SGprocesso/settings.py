@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,9 +92,9 @@ DATABASES = {
     }
 } 
 
-import dj_database_url
-db_from_env =  dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+#import dj_database_url
+#db_from_env =  dj_database_url.config(conn_max_age=600)
+#DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -145,5 +146,8 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+django_heroku.settings(locals())
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
