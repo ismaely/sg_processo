@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from utilizador.models import Utilizador, Categoria, Entidade
+from utilizador.models import Entidade, Utilizador, Categoria
+
 
 
 CATEGORIA = []
